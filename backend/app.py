@@ -1,20 +1,24 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from pymongo import MongoClient
-import os
 from dotenv import load_dotenv
+from flask_jwt_extended import JWTManager
+
+from db.connection import get_db
 
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+app.config['JWT_SECRET_KEY'] = os.getenv("SECRET_KEY")
+jwt = JWTManager(app)
 
-client = MongoClient(os.getenv("MONGNO_URI"))
-db = client["rallyhub"]
-
-@app.route("/)")
+@app.route("/")
 def home():
-    return jsonify({"message": "Welcome to the ACR Hub Backend!"})
+    db = get_db()
+    return jsonify({
+        "message": "Backend running",
+        "collections": db.list_collection_names()
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
