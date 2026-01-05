@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
+import os
+from routes.users import users_bp
 
 from db.connection import get_db
 
@@ -12,6 +14,8 @@ CORS(app)
 app.config['JWT_SECRET_KEY'] = os.getenv("SECRET_KEY")
 jwt = JWTManager(app)
 
+app.register_blueprint(users_bp, url_prefix='/users')
+
 @app.route("/")
 def home():
     db = get_db()
@@ -19,6 +23,8 @@ def home():
         "message": "Backend running",
         "collections": db.list_collection_names()
     })
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
