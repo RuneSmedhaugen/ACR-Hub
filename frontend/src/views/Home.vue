@@ -57,5 +57,3 @@
 import FeatureCard from "@/components/ui/FeatureCard.vue";
 </script>
 
-<style src="../assets/futuristic.css"></style>
-<style src="../assets/main.css"></style>
