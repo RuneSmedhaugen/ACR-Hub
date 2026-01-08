@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.glass-card {
+		background-color: rgba(0,0,0,0.40);
+		border: 1px solid rgba(255,255,255,0.06);
+		border-radius: 1rem;
+		padding: 1.5rem;
+		box-shadow: 0 10px 40px rgba(14, 22, 34, 0.6), 0 2px 8px rgba(99,102,241,0.04) inset;
+		-webkit-backdrop-filter: blur(8px) saturate(120%);
+		backdrop-filter: blur(8px) saturate(120%);
+	}
+
+	.stat-card {
+		background-color: rgba(0,0,0,0.30);
+		border: 1px solid rgba(255,255,255,0.06);
+		border-radius: 0.75rem;
+		padding: 1rem;
+		text-align: center;
+	}
+
+	.podium-card {
+		border: 1px solid rgba(255,255,255,0.06);
+		border-radius: 1rem;
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));
+		backdrop-filter: blur(6px) saturate(120%);
+	}
+
+	.btn-primary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-weight: 600;
+		color: #fff;
+		background-image: linear-gradient(90deg,#7c3aed 0%,#ef4444 100%);
+		box-shadow: 0 6px 20px rgba(124,58,237,0.12), 0 1px 0 rgba(255,255,255,0.02) inset;
+		transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+	}
+
+	.btn-primary:hover { transform: translateY(-2px); opacity: 0.98; }
+
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.45rem 0.9rem;
+		border-radius: 0.5rem;
+		font-weight: 500;
+		color: rgba(255,255,255,0.92);
+		border: 1px solid rgba(255,255,255,0.10);
+		background: transparent;
+		box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+	}
+
+	.input {
+		width: 100%;
+		padding: 0.5rem 0.75rem;
+		border-radius: 0.5rem;
+		background: #0f1724;
+		color: #fff;
+		border: 1px solid rgba(255,255,255,0.10);
+		outline: none;
+		transition: box-shadow .12s ease, border-color .12s ease;
+	}
+
+	.th {
+		padding: 0.75rem 1rem;
+		font-size: 0.875rem;
+		color: rgba(203,213,225,0.9);
+		letter-spacing: 0.02em;
+	}
+
+	.td {
+		padding: 0.75rem 1rem;
+		font-size: 0.875rem;
+		color: rgba(226,232,240,0.92);
+	}
+
+	.label { font-size: 0.875rem; color: rgba(148,163,184,0.95); margin-bottom: 0.25rem; }
+	.value { font-size: 1.25rem; font-weight: 700; color: #fff; }
+}
+
+/* subtle neon accent utility */
+.neon-accent {
+	text-shadow: 0 2px 12px rgba(99,102,241,0.14), 0 1px 3px rgba(236,72,153,0.04);
+}
+
+/* enforce dark app background and base type color to avoid white flash */
+html, body, #app {
+	background-color: #070912;
+	color: #e6eef8;
+	min-height: 100%;
+}
+

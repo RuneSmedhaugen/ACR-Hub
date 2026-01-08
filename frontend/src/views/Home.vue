@@ -1,27 +1,30 @@
 <template>
-  <div class="bg-zinc-950 text-white min-h-screen">
+  <div class="bg-[#070912] text-white min-h-screen">
 
     <!-- Hero -->
-    <section class="max-w-7xl mx-auto px-6 py-24 text-center">
-      <h1 class="text-5xl font-extrabold mb-6">
+    <section class="max-w-7xl mx-auto px-6 py-32 text-center">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-red-500 neon-accent">
         Assetto Corsa Rally Hub
       </h1>
-      <p class="text-zinc-400 text-lg max-w-2xl mx-auto mb-10">
+      <p class="text-zinc-300 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
         Compete in single-player rally events, climb the leaderboards,
         and represent your team across stages.
+        <span class="text-red-400 font-semibold neon-accent">
+          !!! ALL INFO, LEADERBOARDS AND TEAMS ARE PLACEHOLDERS !!!
+        </span>
       </p>
 
-      <div class="flex justify-center gap-6">
+      <div class="flex flex-col sm:flex-row justify-center gap-6">
         <RouterLink
           to="/leaderboard"
-          class="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-lg font-semibold"
+          class="btn-primary"
         >
           View Leaderboards
         </RouterLink>
 
         <RouterLink
           to="/register"
-          class="border border-zinc-700 hover:border-white px-8 py-4 rounded-lg font-semibold"
+          class="btn-outline"
         >
           Join the Hub
         </RouterLink>
@@ -33,14 +36,17 @@
       <FeatureCard
         title="Races"
         text="Create and participate in rally events with global rankings."
+        class="glass-card"
       />
       <FeatureCard
         title="Teams"
         text="Join or create teams and dominate the leaderboard together."
+        class="glass-card"
       />
       <FeatureCard
         title="Leaderboards"
         text="Track the fastest drivers across all stages and seasons."
+        class="glass-card"
       />
     </section>
 
@@ -48,5 +54,8 @@
 </template>
 
 <script setup>
-import FeatureCard from "@/components/ui/FeatureCard.vue"
+import FeatureCard from "@/components/ui/FeatureCard.vue";
 </script>
+
+<style src="../assets/futuristic.css"></style>
+<style src="../assets/main.css"></style>
