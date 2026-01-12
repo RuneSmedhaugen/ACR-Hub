@@ -9,26 +9,7 @@
       <p class="text-zinc-300 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
         Compete in single-player rally events, climb the leaderboards,
         and represent your team across stages.
-        <span class="text-red-400 font-semibold neon-accent">
-          !!! ALL INFO, LEADERBOARDS AND TEAMS ARE PLACEHOLDERS !!!
-        </span>
       </p>
-
-      <div class="flex flex-col sm:flex-row justify-center gap-6">
-        <RouterLink
-          to="/leaderboard"
-          class="btn-primary"
-        >
-          View Leaderboards
-        </RouterLink>
-
-        <RouterLink
-          to="/register"
-          class="btn-outline"
-        >
-          Join the Hub
-        </RouterLink>
-      </div>
     </section>
 
     <!-- Features -->
