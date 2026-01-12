@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router"
+import useAuth from '@/stores/auth'
 
 // Views
 import Home from "@/views/Home.vue"
 import Login from "@/views/Login.vue"
 import Register from "@/views/Register.vue"
 import Profile from "@/views/Profile.vue"
+import EditProfile from "@/views/EditProfile.vue"
 import Teams from "@/views/Teams.vue"
 import TeamDetail from "@/views/TeamDetail.vue"
 import Races from "@/views/Races.vue"
@@ -54,11 +56,44 @@ const routes = [
     props: true,
     meta: { requiresAuth: true }
   }
+  ,
+  {
+    path: "/profile/edit",
+    name: "EditProfile",
+    component: EditProfile,
+    meta: { requiresAuth: true }
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Navigation guard: protect routes that set `meta.requiresAuth`
+const auth = useAuth()
+router.beforeEach(async (to, from, next) => {
+  // redirect logged-in users away from login/register
+  if ((to.name === 'Login' || to.name === 'Register') && auth.isLoggedIn()) {
+    return next({ name: 'Home' })
+  }
+
+  if (to.meta?.requiresAuth) {
+    if (!auth.isLoggedIn()) {
+      return next({ name: 'Login', query: { redirect: to.fullPath } })
+    }
+
+    // ensure user object is loaded
+    if (!auth.state.user) {
+      try {
+        await auth.fetchUser()
+      } catch (e) {
+        return next({ name: 'Login', query: { redirect: to.fullPath } })
+      }
+    }
+  }
+
+  next()
 })
 
 export default router
