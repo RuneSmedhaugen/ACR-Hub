@@ -56,6 +56,7 @@ export default function useAuth() {
     state,
     isLoggedIn,
     fetchUser,
+    setToken,
     login,
     logout
   }
