@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from db.connection import get_db
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timezone
 from bson import ObjectId
 
 users_bp = Blueprint('users', __name__)
@@ -37,7 +37,7 @@ def register():
         'car': car,
         'location': location,
         'team': team,
-        'created_at': datetime.now(datetime.timezone.utc)
+        'created_at': datetime.now(timezone.utc)
     }
     db_.users.insert_one(user_doc)
     return jsonify({"msg": "User registered successfully"}), 201
@@ -60,9 +60,10 @@ def login():
 @jwt_required()
 def get_logged_in_user():
     db_ = get_db()
-    user_id = get_jwt_identity()
+    # JWT identity contains the username (set at login), so look up by username
+    username = get_jwt_identity()
     user = db_.users.find_one(
-        {'_id': ObjectId(user_id)},
+        {'username': username},
         {'password': 0}
     )
     if not user:
