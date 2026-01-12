@@ -14,10 +14,33 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <RouterLink to="/login" class="nav-link">Login</RouterLink>
-        <RouterLink to="/register" class="btn-primary">Register</RouterLink>
+        <template v-if="isLoggedIn">
+          <RouterLink v-if="userId" :to="{ name: 'Profile', params: { id: userId } }" class="nav-link">Profile</RouterLink>
+          <button @click="handleLogout" class="btn-ghost">Logout</button>
+        </template>
+        <template v-else>
+          <RouterLink to="/login" class="nav-link">Login</RouterLink>
+          <RouterLink to="/register" class="btn-primary">Register</RouterLink>
+        </template>
       </div>
 
     </div>
   </nav>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import useAuth from '@/stores/auth'
+
+const auth = useAuth()
+const router = useRouter()
+
+const isLoggedIn = computed(() => auth.isLoggedIn())
+const userId = computed(() => auth.state.user?._id)
+
+function handleLogout() {
+  auth.logout()
+  router.push({ name: 'Home' })
+}
+</script>
