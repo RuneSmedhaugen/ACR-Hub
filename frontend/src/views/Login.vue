@@ -47,14 +47,29 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import useAuth from '@/stores/auth'
 
-const username = ref("")
-const password = ref("")
+const router = useRouter()
+const auth = useAuth()
+const username = ref('')
+const password = ref('')
+const loading = ref(false)
 
-const login = () => {
-  // hook Flask later
-  console.log("Login:", username.value, password.value)
+const login = async () => {
+  loading.value = true
+  try {
+    const res = await auth.login(username.value, password.value)
+    if (res?.access_token) {
+      router.push({ name: 'Home' })
+    }
+  } catch (e) {
+    console.error('Login failed', e)
+    alert(e.response?.data?.msg || 'Login failed')
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 

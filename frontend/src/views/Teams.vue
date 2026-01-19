@@ -5,9 +5,6 @@
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-semibold text-white">Teams</h1>
-        <button class="btn-primary">
-          + Create Team
-        </button>
       </div>
 
       <!-- Team List -->
@@ -39,18 +36,28 @@
 </template>
 
 <script setup>
-const teams = [
-  {
-    name: "Nordic Rally",
-    members: ["Rune", "Axel", "Luna"]
-  },
-  {
-    name: "Midnight Apex",
-    members: ["Rune", "Kai"]
-  },
-  {
-    name: "Gravel Kings",
-    members: ["Nova", "Echo", "Blaze"]
+import { ref, onMounted } from 'vue'
+import teamService from '@/services/team.service'
+import { useRouter } from 'vue-router'
+
+const teams = ref([])
+const loading = ref(false)
+const router = useRouter()
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    const data = await teamService.listTeams()
+    // backend returns array of team objects with _id and member_count
+    teams.value = data
+  } catch (e) {
+    console.error('Failed to load teams', e)
+  } finally {
+    loading.value = false
   }
-]
+})
+
+function openTeam(team) {
+  router.push({ name: 'TeamDetail', params: { id: team._id } })
+}
 </script>

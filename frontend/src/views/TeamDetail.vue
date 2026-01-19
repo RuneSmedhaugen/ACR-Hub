@@ -49,9 +49,26 @@
 </template>
 
 <script setup>
-const team = {
-  name: "Nordic Rally",
-  description: "Cold tires, fast lines, questionable bravery.",
-  members: ["Rune", "Axel", "Luna", "Nova"]
-}
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import teamService from '@/services/team.service'
+
+const route = useRoute()
+const team = ref({ name: '', description: '', members: [] })
+const loading = ref(false)
+
+onMounted(async () => {
+  const id = route.params.id
+  if (!id) return
+  loading.value = true
+  try {
+    const data = await teamService.getTeam(id)
+    // team returned has members as array of user objects
+    team.value = data
+  } catch (e) {
+    console.error('Failed to load team', e)
+  } finally {
+    loading.value = false
+  }
+})
 </script>

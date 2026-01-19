@@ -5,16 +5,13 @@
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-semibold text-white">Races</h1>
-        <button class="btn-primary">
-          + Create Race
-        </button>
       </div>
 
       <!-- Race List -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           v-for="race in races"
-          :key="race.id"
+          :key="race._id"
           class="glass-card hover:border-indigo-500 transition"
         >
           <h2 class="text-xl text-white mb-1">{{ race.name }}</h2>
@@ -26,9 +23,9 @@
             <span class="text-neutral-500">
               Class: {{ race.class }}
             </span>
-            <button class="text-indigo-400 hover:underline">
+            <router-link :to="{ name: 'Leaderboard', query: { race: race._id } }" class="text-indigo-400 hover:underline">
               Leaderboard →
-            </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -38,28 +35,21 @@
 </template>
 
 <script setup>
-const races = [
-  {
-    id: 1,
-    name: "Midnight Gravel Run",
-    track: "Finland SS3",
-    surface: "Gravel",
-    class: "Group A"
-  },
-  {
-    id: 2,
-    name: "Alpine Descent",
-    track: "Monte Carlo SS1",
-    surface: "Tarmac",
-    class: "R5"
-  },
-  {
-    id: 3,
-    name: "Snowblind Sprint",
-    track: "Sweden SS5",
-    surface: "Snow",
-    class: "WRC"
+import { ref, onMounted } from 'vue'
+import raceService from '@/services/race.service'
+
+const races = ref([])
+const loading = ref(false)
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    races.value = await raceService.listRaces()
+  } catch (e) {
+    console.error('Failed to load races', e)
+  } finally {
+    loading.value = false
   }
-]
+})
 </script>
 
