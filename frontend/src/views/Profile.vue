@@ -25,7 +25,7 @@
 
                 <div class="flex items-center gap-2">
                   <button @click="goEdit" class="px-4 py-2 rounded-lg border border-white/10 bg-indigo-600 text-white hover:bg-indigo-500">Edit Profile</button>
-                  <button class="px-3 py-2 rounded-lg border border-white/10 text-white/80">Create team</button>
+                  <button @click="goCreateTeam" class="px-3 py-2 rounded-lg border border-white/10 text-white/80">Create team</button>
                 </div>
               </div>
             </div>
@@ -98,6 +98,10 @@ const avatarStyle = {
 function goEdit() {
   // placeholder route for future edit profile page
   router.push({ path: '/profile/edit' })
+}
+
+function goCreateTeam() {
+  router.push({ name: 'CreateTeam' })
 }
 
 onMounted(async () => {

@@ -9,5 +9,10 @@ export default {
 	getRace(raceId) {
 		return api.get(`/races/${raceId}`)
 			.then(res => res.data)
+	},
+
+	createRace(raceData) {
+		return api.post('/races/', raceData)
+			.then(res => res.data)
 	}
 }

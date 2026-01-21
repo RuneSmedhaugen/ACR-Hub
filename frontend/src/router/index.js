@@ -9,7 +9,9 @@ import Profile from "@/views/Profile.vue"
 import EditProfile from "@/views/EditProfile.vue"
 import Teams from "@/views/Teams.vue"
 import TeamDetail from "@/views/TeamDetail.vue"
+import CreateTeam from "@/views/CreateTeam.vue"
 import Races from "@/views/Races.vue"
+import CreateRace from "@/views/CreateRace.vue"
 import Leaderboard from "@/views/Leaderboard.vue"
 
 const routes = [
@@ -39,9 +41,21 @@ const routes = [
     component: Races
   },
   {
+    path: "/races/create",
+    name: "CreateRace",
+    component: CreateRace,
+    meta: { requiresAuth: true }
+  },
+  {
     path: "/teams",
     name: "Teams",
     component: Teams
+  },
+  {
+    path: "/teams/create",
+    name: "CreateTeam",
+    component: CreateTeam,
+    meta: { requiresAuth: true }
   },
   {
     path: "/teams/:id",
