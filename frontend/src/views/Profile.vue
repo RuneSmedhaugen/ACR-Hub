@@ -26,6 +26,7 @@
                 <div class="flex items-center gap-2">
                   <button @click="goEdit" class="px-4 py-2 rounded-lg border border-white/10 bg-indigo-600 text-white hover:bg-indigo-500">Edit Profile</button>
                   <button @click="goCreateTeam" class="px-3 py-2 rounded-lg border border-white/10 text-white/80">Create team</button>
+                  <button @click="goCreateRace" class="px-3 py-2 rounded-lg border border-white/10 text-white/80">Create race</button>
                 </div>
               </div>
             </div>
@@ -102,6 +103,10 @@ function goEdit() {
 
 function goCreateTeam() {
   router.push({ name: 'CreateTeam' })
+}
+
+function goCreateRace() {
+  router.push({ name: 'CreateRace' })
 }
 
 onMounted(async () => {
