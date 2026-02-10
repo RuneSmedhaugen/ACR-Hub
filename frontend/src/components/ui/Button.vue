@@ -1,3 +1,5 @@
+
+
 <template>
 	<button
 		:class="buttonClass"
@@ -9,6 +11,7 @@
 </template>
 
 <script setup>
+import { computed, ref, watch } from 'vue'
 const props = defineProps({
 	variant: { type: String, default: 'primary' }
 })

@@ -97,7 +97,6 @@ const avatarStyle = {
 }
 
 function goEdit() {
-  // placeholder route for future edit profile page
   router.push({ path: '/profile/edit' })
 }
 
